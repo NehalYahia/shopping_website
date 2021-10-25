@@ -3,9 +3,10 @@ import { Link } from "react-router-dom"
 import axios from 'axios'
 import Cart from '../cart/cart'
 import Favourite from '../favouriteItems/Favourite'
+import { connect } from 'react-redux'
 
 
-export default class Navbar extends Component {
+class Navbar extends Component {
 
     state = {
         categories: [
@@ -16,18 +17,18 @@ export default class Navbar extends Component {
     getCategories = async () => {
         let { data } = await axios.get(`https://fakestoreapi.com/products/categories`)
         this.setState({
-            categories: data ,isReady:true
+            categories: data, isReady: true
         });
     }
 
-    async componentDidMount () {
-       await this.getCategories();
+    async componentDidMount() {
+        await this.getCategories();
     }
 
     render() {
         return (
             <>
-            
+
                 <div className="header sticky-top bg-white">
                     <div className="container">
                         <form className="form-inline mb-3 d-inline-block w-25">
@@ -40,18 +41,19 @@ export default class Navbar extends Component {
                         <div className="cart-group d-inline-block w-25 text-right">
                             <button class="btn btn-danger" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
                                 <i className="fas fa-cart-plus"></i>
+                                <span className="p-3">{this.props.products.length}</span>
                             </button>
                             <button class="btn btn-danger ml-1" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">
                                 <i className="fas fa-heart"></i>
                             </button>
                         </div>
                     </div>
-                
+
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <Cart/>
+                        <Cart />
                     </div>
                     <div class="collapse multi-collapse" id="multiCollapseExample2">
-                        <Favourite/>
+                        <Favourite />
                     </div>
 
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -70,7 +72,7 @@ export default class Navbar extends Component {
                                         return (
 
                                             <li key={index} className="nav-item mr-3">
-                                                <Link className="nav-link" to={value}>{value}</Link>
+                                                <Link className="nav-link" to={`/categoryProducts/${value}`}>{value}</Link>
                                             </li>
 
                                         )
@@ -81,7 +83,7 @@ export default class Navbar extends Component {
                                 </ul>
 
 
-            {/* social media */}
+                                {/* social media */}
                                 <ul className="navbar-nav mr-5 pr-5">
                                     <li className="nav-item mr-2 ml-5 pl-5 h2">
                                         <Link className="nav-link" to="/"><i class="fab fa-instagram-square"></i> <span className="sr-only">(current)</span></Link>
@@ -103,7 +105,11 @@ export default class Navbar extends Component {
                                 </ul>
 
 
-                                <button className="btn btn-secondary"><Link className="text-white" to="/Login" >Login</Link></button>
+                                <button className="btn border border-secondary ">
+                                    <Link className="text-secondary " to="/Login" >
+                                        <i class="fas fa-user-alt"></i>
+                                    </Link>
+                                </button>
 
 
                             </div>
@@ -115,3 +121,16 @@ export default class Navbar extends Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.addpro.products,
+    }
+}
+
+
+
+
+
+export default connect(mapStateToProps, null)(Navbar)

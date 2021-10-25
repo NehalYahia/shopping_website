@@ -1,20 +1,15 @@
 let State ={
-    products:[],
-    totalprice:0
+    products:[],  // shopping cart items
+    totalprice:0 ,// The total price of the selected items
 }
 
 export default function addpro(prevState=State,action){
-    console.log(action.type)
     switch(action.type){
-    
+    // add products to shopping cart
         case 'ADDITEMS':{
             let exist = prevState.products.find((value,index) => {return value.id === action.payload.id})
-
             if (exist){
-                console.log("true")
-
                 return{
-                    //    products:[...prevState.products,action.payload]
                     products:prevState.products.map((value,index)=>value.id===action.payload.id?
                      {... value,qty:value.qty + 1}: value),
                     totalprice:prevState.totalprice+action.payload.price
@@ -23,7 +18,6 @@ export default function addpro(prevState=State,action){
                     }
             }
             else {
-                console.log("ff")
                 return{
                     products:[...prevState.products,{...action.payload,qty:1}],
                     totalprice:prevState.totalprice+action.payload.price
@@ -32,15 +26,14 @@ export default function addpro(prevState=State,action){
 
             }
         }
-
+    // delete a specific product in the shopping cart
         case 'DELETEITEMS':{
             return{
                 products:prevState.products.filter((item) => { return item.id !== action.payload.id })
-                
             }
 
         }
-    
+    // Increase the quantity of a specific product in the shopping cart
        case 'INCREASE':{
             return{  
                 products:prevState.products.map((item)=>item.id===action.payload.id?{...action.payload,qty:action.payload.qty+1}:item)
@@ -48,24 +41,19 @@ export default function addpro(prevState=State,action){
 
             }
         }
-    
+    // decrease the quantity of a specific product in the shopping cart
        case 'DECREASE':{
             return{
                
                  products:prevState.products.map((item)=>item.id===action.payload.id && action.payload.qty>1 ?{...action.payload,qty:action.payload.qty-1}:item)
-                 ,totalprice:prevState.totalprice-action.payload.price
+                 ,totalprice:action.payload.qty>1 ? prevState.totalprice-action.payload.price: prevState.totalprice
 
                 }
         }
 
     }
 
-       
 
-          
-
-    console.log(State)
-  
     return prevState
     
 }

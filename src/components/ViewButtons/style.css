@@ -1,0 +1,16 @@
+.ViewButtons{
+    border-top-left-radius: 12px;
+    top: 60%;
+    left: 100%;
+    
+}
+
+.ViewButtons button
+{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ViewButtons button:hover
+{
+    background-color: rgba(0, 0, 0, 0.3);
+}

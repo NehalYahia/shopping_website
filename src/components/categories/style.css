@@ -1,0 +1,13 @@
+
+.categories-bg
+{
+  clip-path: polygon(0 0, 50% 25%, 100% 0, 100% 98%, 50% 75%, 0 100%);
+
+  
+}
+.categories-bg a:hover{
+  text-shadow: 0 0 3px #FF0000, 0 0 5px white;
+}
+
+
+ 

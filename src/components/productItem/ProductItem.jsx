@@ -1,48 +1,35 @@
+import classNames from 'classnames'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import AddButton from '../AddButton/AddButton'
+import FavouriteButton from '../FavouriteButton/FavouriteButton'
+import './style.css'
 
- class ProductItem extends Component {
-
-
-    state = {
-        style:{
-            "color":"white",
-            "background-color":"#6c757d",
-            "outline":"none"
-        }
-        
-    }
-
-    changeColor=async()=>{
-        let change= {
-            "color":"red",
-            "background-color":"white",
-            
-        }
-        let current= {
-            "color":"white",
-            "background-color":"#6c757d"
-        }
-        this.state.style['color']=="white"&& this.state.style['background-color']=="#6c757d"?await this.setState({style:change}):await this.setState({style:current})
-
-    }
+class ProductItem extends Component {  
     render() {
+console.log(this.props.view)
         return (
             <>
-              
-                                <div className="col-3 my-5 border border-secondary p-2">
-                                    <button className="btn" style={this.state.style}
-                                            onClick={() =>{this.changeColor();this.props.favouriteitem(this.props.productcom)}}>
-                                        <i className="fas fa-heart"></i>
-                                    </button>
-                                    <img src={this.props.productcom.image} width="100%" height="250px" alt=""></img>
-                                    <p className="text-center text-truncate">{this.props.productcom.title}</p>
-                                    <button className="btn btn-danger w-100" onClick={() => this.props.additem(this.props.productcom)}>Add to cart</button>
-                                    
 
-                                </div>
+                <div className={classNames(this.props.view=="horizontal"? "horizontal":"vertical", "productItem") } >
+                    <div className="product_img">
+                        <Link to={`/ProductView/${this.props.productcom.id}`}>
+                            <img className="p-3" src={this.props.productcom.image} width="100%" height="250px" alt="" />
+                        </Link>
+                    </div>
+                    <div className="product_info pb-2 pt-5 px-4">
+                        <p className="text-left text-truncate">{this.props.productcom.title}</p>
+                        <p className="font-weight-bold">{this.props.productcom.price}$</p>
 
-                          
+                        <AddButton productcom={this.props.productcom} style="w-75 btn btn-light text-secondary font-weight-bold addCart" />
+                        <FavouriteButton productcom={this.props.productcom} style="btn w-25 favourite" />
+
+                    </div>
+                </div>
+
+
+
             </>
         )
     }
@@ -51,20 +38,11 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products,
+        // products: state.products,
+        view:state.productView.view
 
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        // data: (item) => dispatch({ type: 'CARTITEMS', payload: item }),
-        additem: (item) => dispatch({ type: 'ADDITEMS', payload: item }),
-        favouriteitem: (item) => dispatch({ type: 'FAVOURITEITEM', payload: item }),
-
-
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)
+export default connect(mapStateToProps, null)(ProductItem)
 

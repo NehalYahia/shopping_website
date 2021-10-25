@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import classnames from 'classnames';
+import './style.css'
 
 class cart extends Component {
 
@@ -10,41 +12,47 @@ class cart extends Component {
     
 
     render() {
+ 
         return (
             <>
-
-
                 <div className="card card-body">
                     {this.props.products?.length===0?<h4 className="text-center text-danger border border-danger m-0 p-3">Your Cart Is Empty  <i className="fas fa-cart-plus"></i></h4>:
                     
                     <div className="container">
                     <div className="row">
-                        <div className="col-8 bg-secondary p-5">
+                        <div className="col-8 bg p-5">
                             <h2 className="pb-3">YOUR SHOPPING CART</h2>
                             {this.props.products?.map((value, index) => {
                                 return (
-                                    <div key={index} className="row my-2 border">
+                                    <div key={index} className="row my-2 ">
                                         <div className="col-2">
                                             <img src={value.image} className="img-thumbnail" alt="" />
-                                            {/* <p className="text-center">{value.title}</p> */}
                                         </div>
                                         <div className="col-2 align-self-center">
-                                            <button className="btn btn-danger"onClick={() =>this.props.decrease(value)} >-</button>
+                                            <button className={classnames("btn btn-danger",`${value.qty==1?"bg-color":"hide"}`)}
+                                                    onClick={() =>this.props.decrease(value)} 
+                                                    >
+                                                -
+                                            </button>
                                         </div>
-                                        <div className="col-2 align-self-center">
+                                        <div className="col-2 align-self-center font-weight-bold">
                                            {value.qty}
                                         </div>
                                         <div className="col-2 align-self-center">
                                             <button className="btn btn-warning" onClick={() =>this.props.increase(value)}>+</button>
                                         </div>
-                                        <div className="col-2 align-self-center">
-                                            {value.price}$
+                                        <div className="col-2 align-self-center font-weight-bold">
+                                            {value.price*value.qty}$
                                         </div>
                                         <div className="col-2 align-self-center">
-                                            <button className="btn btn-danger" onClick={() =>this.props.delete(value)}><i class="fas fa-trash-alt"></i></button>
+                                            <button className="btn btn-danger" 
+                                                    onClick={() =>this.props.delete(value)}>
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </div>
-
+                                        <hr className="w-100"></hr>
                                     </div>
+                                  
                                 )
                             })}
 

@@ -33,7 +33,7 @@ export default class Home extends Component {
             <>
                 <Header/>
                 <Features/>
-                <Offers/>
+                {/* <Offers/> */}
                 <Bestseller />
                 <Categories/>
             </>

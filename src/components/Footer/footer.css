@@ -1,0 +1,17 @@
+
+    .footer li, .li{
+        font-size:13px
+    }
+
+    .footer .icon_color{
+        color: gray;
+    }
+    .footer .head_list{
+        font-size:14px;
+    }
+
+    .footer p i{
+            margin: 10px;
+        
+    } 
+

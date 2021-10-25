@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import img from "../../images/Online-fashion-retailers.jpg"
-
+import './style.css'
 
 export default class Header extends Component {
     render() {
