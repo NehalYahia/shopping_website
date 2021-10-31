@@ -2,6 +2,18 @@ body {
   margin: 0;
 
 }
+a:hover{
+  text-decoration: none
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fruktur&family=Henny+Penny&family=Permanent+Marker&display=swap');
+.fontFamily{
+  font-family: 'Fruktur', cursive;
+  font-family: 'Henny Penny', cursive;
+  font-family: 'Permanent Marker', cursive;
+
+
+}
 
 
 

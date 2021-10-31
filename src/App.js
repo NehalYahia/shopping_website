@@ -1,43 +1,30 @@
 import React, { Component } from 'react'
 import { Redirect, Route, Switch } from "react-router-dom"
 import Navbar from './components/Navbar/Navbar'
-import Home from './components/Home'
 import Login from './components/login/Login'
 import Sign_in from './components/sign_in/Sign_in'
-import ProductView from './components/productView/productView'
-import CategoryProducts from './components/categoryProducts/CategoryProducts'
 import Footer from './components/Footer/Footer'
-
-
-
-
-
-
+import Home from './pages/Home/Home'
+import CategoryView from './pages/CategoryView/CategoryView'
+import ProductPage from './pages/ProductPage/ProductPage'
 
 export default class App extends Component {
-  // state={
-  //   cartitems:[]
-  // }
 
-
-  //   handleUpdateCart(data)
-  // {
-  //   this.setState({cartitems:data})
-
-  // }
   render() {
     return (
       <>
 
-        {/* <Navbar cartitems={this.state.cartitems} updateCart={this.handleUpdateCart.bind(this)}/> */}
-          <Navbar />
+        <Navbar />
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/sign_in" component={Sign_in} />
-          <Route path="/productView/:id" component={ProductView} />
-          <Route path="/categoryProducts/:name" component={CategoryProducts} />
-          <Footer />
+          <Route path="/product-view/:name/:id" component={ProductPage} />
+          <Route path="/category-view/:name" component={CategoryView} />
+        </Switch>
+
+        <Footer />
 
 
 

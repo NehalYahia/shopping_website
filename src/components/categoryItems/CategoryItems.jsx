@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import ProductItem from '../productItem/ProductItem'
 import ViewButtons from '../ViewButtons/ViewButtons'
 
-export default class CategoryProducts extends Component {
+export default class CategoryItems extends Component {
     state = {
         categoryProducts: []
     }
     getCategoryProducts = async () => {
-        let data = await axios.get(`https://fakestoreapi.com/products/category/${this.props.match.params.name}`, this.state.categoryProducts)
+        let data = await axios.get(`https://fakestoreapi.com/products/category/${this.props.path_name}`, this.state.categoryProducts)
         await this.setState({ categoryProducts: data.data })
     }
 
@@ -24,7 +24,7 @@ export default class CategoryProducts extends Component {
                         <div className="row">
                             {this.state.categoryProducts.map((value, index) => {
                                 return (
-                                    <ProductItem key={index} productcom={value} />
+                                    <ProductItem key={index} productcom={value} categoryName={this.props.path_name} />
                                 )
                             })}
 

@@ -36,7 +36,7 @@ export default class Categories extends Component {
                             return (
                                 <>
                                     <div key={index} className=" h5 text-center align-self-center" style={{ "width": "200px" }}>
-                                        <Link className="text-white text-decoration-none" to={`/categoryProducts/${value}`}>{value}</Link>
+                                        <Link className="text-white text-decoration-none" to={`/category-view/${value}`}>{value}</Link>
                                     </div>
                                     {index == 1 ?
                                         <div className=" my-5 text-center">

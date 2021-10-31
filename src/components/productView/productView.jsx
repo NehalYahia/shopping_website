@@ -4,7 +4,8 @@ import AddButton from '../AddButton/AddButton'
 import FavouriteButton from '../FavouriteButton/FavouriteButton'
 import Rating from '../Rating/Rating'
 
-export default class ProductView extends Component {
+export default class 
+ProductView extends Component {
 
     state = {
         productDetails: [],
@@ -13,16 +14,19 @@ export default class ProductView extends Component {
 
 
     getProductDetails = async () => {
-        await axios.get(`https://fakestoreapi.com/products/${this.props.match.params.id}`).then(data => {
+        await axios.get(`https://fakestoreapi.com/products/${this.props.path_id}`).then(data => {
             this.setState({ productDetails: data.data, count: data.data.rating })
         })
     }
 
     componentDidMount = async () => {
         await this.getProductDetails();
+        var name =this.state.productDetails.title;
+        this.props.selectProductName(name);
 
     }
     render() {
+       
 
         return (
 
@@ -46,7 +50,7 @@ export default class ProductView extends Component {
                             </div>
                             <div className="px-2">
                                 <AddButton productcom={this.state.productDetails} style="btn btn-danger text-light font-weight-bold w-75" />
-                                <FavouriteButton productcom={this.state.productDetails} style="btn w-25" />
+                                <FavouriteButton productcom={this.state.productDetails} style="btn mx-2 rounded-circle" />
                             </div>
 
 

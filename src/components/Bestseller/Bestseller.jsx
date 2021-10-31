@@ -6,23 +6,16 @@ import ViewButtons from '../ViewButtons/ViewButtons'
 export default class Bestseller extends Component {
     state = {
         AllProducts: []
-
     }
 
     getAllProducts = async () => {
         let { data } = await axios.get(`https://fakestoreapi.com/products`)
         await this.setState({ AllProducts: data })
-
-
     }
 
     componentDidMount = async () => {
         await this.getAllProducts();
-
-
     }
-
-
 
     render() {
 
@@ -34,7 +27,7 @@ export default class Bestseller extends Component {
                     <div className="container">
                         <div className="row my-5">
                             <hr className="col-3 border border-dark" />
-                            <h2 className="col-3 text-center">BEST SELLER</h2>
+                            <h2 className="col-3 text-center fontFamily" >BEST SELLER</h2>
                             <hr className="col-3 border border-dark" />
                         </div>
 

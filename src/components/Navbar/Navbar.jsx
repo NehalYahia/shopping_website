@@ -72,7 +72,7 @@ class Navbar extends Component {
                                         return (
 
                                             <li key={index} className="nav-item mr-3">
-                                                <Link className="nav-link" to={`/categoryProducts/${value}`}>{value}</Link>
+                                                <Link className="nav-link" to={`/category-view/${value}`}>{value}</Link>
                                             </li>
 
                                         )
